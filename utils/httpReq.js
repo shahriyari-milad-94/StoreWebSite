@@ -12,7 +12,7 @@ const postData = async (path, data) => {
 
     const json = await response.json();
     return json;
-  ل} catch (error) {
+  } catch (error) {
     alert("An error occurred");
   }
 };
