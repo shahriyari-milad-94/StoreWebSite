@@ -14,6 +14,7 @@ const getCookie = () => {
     };
   }
 
+
   return false;
 };
 
