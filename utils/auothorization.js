@@ -25,7 +25,11 @@ const authHandler = () => {
     (cookie && url.includes("auth")) ||
     (!cookie && url.includes("dashboard"))
   ) {
+<<<<<<< HEAD
     location.assign("auth.html");
+=======
+    location.assign("index.html");
+>>>>>>> c6914ba (refactor: centralize authentication and route protection logic)
     return false;
   }
 };
