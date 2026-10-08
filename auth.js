@@ -1,6 +1,5 @@
-// import { postData } from "./utils/httpReq.js";
-// import { setCookie } from "./utils/cookie.js";
 // import authHandler from "./utils/auothorization.js";
+import { setCookie } from "./utils/cookie.js";
 
 import { postData } from "./utils/httpReq.js";
 
@@ -10,9 +9,6 @@ const loginButton = document.querySelector("button");
 const submitHandler = async (event) => {
   event.preventDefault();
 
-  // const userName = inputBox[0].value;
-  // const password = inputBox[1].value;  
-
   const data = {
     username: "emilys",
     password: "emilyspass",
@@ -20,22 +16,9 @@ const submitHandler = async (event) => {
 
   const response = await postData("auth/login", data);
   console.log(response);
+
+  // document.cookie = `token=${response.accessToken}; max-age=${24 * 60 * 60}; path:/`;
+  setCookie(response.accessToken);
+  location.assign("index.html");
 };
 loginButton.addEventListener("click", submitHandler);
-
-// const submitHandler = async (event) => {
-//   event.preventDefault();
-
-//   const username = inputBox[0].value;
-//   const password = inputBox[1].value;
-
-//   const response = await postData("auth/login", { username, password });
-
-//   console.log(response);
-
-//   setCookie(response.accessToken);
-//   location.assign("index.html");
-// };
-
-
-// document.addEventListener("DOMContentLoaded", authHandler)
