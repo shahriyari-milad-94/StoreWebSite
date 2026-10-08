@@ -1,30 +1,25 @@
-// const setCookie = (data) => {
-//   document.cookie = `token=${data}; max-age=${24 * 60 * 60}; path=/`;
-// };
-
-// const getCookie = () => {
-//   const cookies = document.cookie.split("; ");
-
-//   const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
-
-//   if (tokenCookie) {
-//     const cookieArray = tokenCookie.split("=");
-//     return {
-//       [cookieArray[0]]: cookieArray[1],
-//     };
-//   }
-
-
-//   return false;
-// };
-
-// export { setCookie, getCookie };
-
-
-
-const setCookie=(data)=>{
+const setCookie = (data) => {
   document.cookie = `token=${data}; max-age=${24 * 60 * 60}; path:/`;
+};
 
-}
+const getCookie = () => {
+  const cookies = document.cookie.split("; ");
+  // console.log(cookies);
 
-export {setCookie}
+  const tokenCookie = cookies.find((cookie) => {
+    return cookie.startsWith("token=");
+  });
+  // console.log(tokenCookie);
+
+  if (tokenCookie) {
+    const cookieArray = tokenCookie.split("=");
+    // console.log(cookieArray);
+    return {
+      [cookieArray[0]]: cookieArray[1],
+    };
+  } else {
+    return false;
+  }
+};
+
+export { setCookie, getCookie };

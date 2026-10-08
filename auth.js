@@ -1,5 +1,4 @@
-// import authHandler from "./utils/auothorization.js";
-import { setCookie } from "./utils/cookie.js";
+import { getCookie, setCookie } from "./utils/cookie.js";
 
 import { postData } from "./utils/httpReq.js";
 
@@ -21,4 +20,17 @@ const submitHandler = async (event) => {
   setCookie(response.accessToken);
   location.assign("index.html");
 };
+
+const init = () => {
+  const cookie = getCookie();
+  console.log(cookie);
+
+  if (cookie) {
+    location.assign("index.html");
+  }
+  // console.log(document.cookie);
+};
+
 loginButton.addEventListener("click", submitHandler);
+
+document.addEventListener("DOMContentLoaded", init);
