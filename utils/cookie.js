@@ -4,16 +4,16 @@ const setCookie = (data) => {
 
 const getCookie = () => {
   const cookies = document.cookie.split("; ");
-  console.log(cookies);
+  // console.log(cookies);
 
   const tokenCookie = cookies.find((cookie) => {
     return cookie.startsWith("token=");
   });
-  console.log(tokenCookie);
+  // console.log(tokenCookie);
 
   if (tokenCookie) {
     const cookieArray = tokenCookie.split("=");
-    console.log(cookieArray);
+    // console.log(cookieArray);
 
     return {
       [cookieArray[0]]: cookieArray[1],
