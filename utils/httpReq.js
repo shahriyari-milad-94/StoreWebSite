@@ -1,4 +1,3 @@
-
 const BASE_URL = "https://dummyjson.com";
 
 const postData = async (path, data) => {
@@ -16,4 +15,14 @@ const postData = async (path, data) => {
   }
 };
 
-export { postData };
+const getData = async (path) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${path}`);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.log("An Error Occured");
+  }
+};
+
+export { postData, getData };

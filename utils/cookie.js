@@ -3,6 +3,7 @@ const setCookie = (data) => {
 };
 
 const getCookie = () => {
+  // console.log(document.cookie);
   const cookies = document.cookie.split("; ");
   // console.log(cookies);
 
