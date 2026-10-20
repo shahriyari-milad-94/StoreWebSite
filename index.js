@@ -1,10 +1,14 @@
-import { getCookie } from "./utils/cookie.js"
+import { getCookie } from "./utils/cookie.js";
 import { getData } from "./utils/httpReq.js";
 import { shortenText } from "./utils/stringFuction.js";
+
+let allProducts = null;
 
 const loginButton = document.getElementById("login");
 const dashboardButton = document.getElementById("dashboard");
 const mainContent = document.getElementById("products");
+const searchButton = document.querySelector("button");
+const inputBox = document.querySelector("input");
 
 const showProducts = (products) => {
   mainContent.innerHTML = "";
@@ -52,9 +56,22 @@ const init = async () => {
     dashboardButton.style.display = "none";
   }
 
-  const allProducts = await getData("products");
+  allProducts = await getData("products");
   console.log(allProducts.products);
   showProducts(allProducts.products);
 };
 
+const searchHandler = () => {
+  const query = inputBox.value.trim().toLowerCase();
+
+  if (!query) return showProducts(allProducts.products);
+
+  const filteredProducts = allProducts.products.filter((product) =>
+    product.title.toLowerCase().includes(query),
+  );
+
+  showProducts(filteredProducts);
+};
+
 document.addEventListener("DOMContentLoaded", init);
+searchButton.addEventListener("click", searchHandler);
