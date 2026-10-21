@@ -3,6 +3,8 @@ import { getData } from "./utils/httpReq.js";
 import { shortenText } from "./utils/stringFuction.js";
 
 let allProducts = null;
+let search = "";
+let category = "all";
 
 const loginButton = document.getElementById("login");
 const dashboardButton = document.getElementById("dashboard");
@@ -62,20 +64,29 @@ const init = async () => {
   showProducts(allProducts.products);
 };
 
-const searchHandler = () => {
-  const query = inputBox.value.trim().toLowerCase();
-
-  if (!query) return showProducts(allProducts.products);
-
-  const filteredProducts = allProducts.products.filter((product) =>
-    product.title.toLowerCase().includes(query),
-  );
+const filterProducts = () => {
+  const filteredProducts = allProducts.products.filter((product) => {
+    if (category === "all") {
+      return product.title.toLocaleLowerCase().includes(search);
+    } else {
+      return (
+        product.title.toLocaleLowerCase().includes(search) &&
+        product.category.toLocaleLowerCase() === category
+      );
+    }
+  });
 
   showProducts(filteredProducts);
 };
 
+const searchHandler = () => {
+  search = inputBox.value.trim().toLowerCase();
+
+  filterProducts();
+};
+
 const filterHandler = (event) => {
-  const category = event.currentTarget.innerText.trim().toLowerCase();
+  category = event.currentTarget.innerText.trim().toLowerCase();
 
   listItems.forEach((li) => {
     if (li.innerText.toLocaleLowerCase() === category) {
@@ -85,13 +96,7 @@ const filterHandler = (event) => {
     }
   });
 
-  if (category === "all") return showProducts(allProducts.products);
-
-  const filteredProducts = allProducts.products.filter(
-    (product) => product.category.toLowerCase() === category,
-  );
-
-  showProducts(filteredProducts);
+  filterProducts();
 };
 
 document.addEventListener("DOMContentLoaded", init);
