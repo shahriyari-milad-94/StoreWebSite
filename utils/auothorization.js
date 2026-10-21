@@ -9,7 +9,7 @@ const authHandler = () => {
     (cookie && url.includes("auth")) ||
     (!cookie && url.includes("dashboard"))
   ) {
-    location.assign("index.html");
+    location.assign("auth.html");
     return false;
   }
 };

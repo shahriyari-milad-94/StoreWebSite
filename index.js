@@ -55,7 +55,9 @@ const init = async () => {
 
   if (cookie) {
     loginButton.style.display = "none";
+    dashboardButton.style.display = "block";
   } else {
+    loginButton.style.display = "block";
     dashboardButton.style.display = "none";
   }
 
